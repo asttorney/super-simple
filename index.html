@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katani Square Apartments - Premium Living</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23667eea" width="1200" height="600"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 150px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #764ba2;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            margin-left: 10px;
+        }
+
+        .btn-secondary:hover {
+            background: #f0f0f0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: #667eea;
+            margin: 15px auto 0;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card i, .feature-card .icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        #about {
+            background: #f8f9fa;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #666;
+        }
+
+        .apartments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .apartment-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .apartment-card:hover {
+            transform: scale(1.05);
+        }
+
+        .apartment-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .apartment-info {
+            padding: 20px;
+        }
+
+        .apartment-info h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .apartment-details {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .price {
+            font-size: 24px;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        #amenities {
+            background: white;
+        }
+
+        .amenities-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .amenity-item {
+            padding: 20px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+        }
+
+        .amenity-item h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        #contact {
+            background: #f8f9fa;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .contact-item {
+            margin-bottom: 25px;
+        }
+
+        .contact-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content p {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <div class="logo">🏢 Katani Square</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#apartments">Apartments</a></li>
+                <li><a href="#amenities">Amenities</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Welcome to Katani Square Apartments</h1>
+        <p>Your Dream Home Awaits</p>
+        <button class="btn">View Apartments</button>
+        <button class="btn btn-secondary">Schedule Tour</button>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Katani Square</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Premium Living at Its Finest</h2>
+                    <p>
+                        Katani Square Apartments represents the pinnacle of modern urban living. 
+                        Strategically located in the heart of the city, we offer a perfect blend 
+                        of comfort, convenience, and luxury.
+                    </p>
+                    <p>
+                        Our commitment is to provide residents with exceptional service, 
+                        state-of-the-art facilities, and a vibrant community where everyone feels 
+                        welcomed and valued.
+                    </p>
+                    <p>
+                        With over 15 years of excellence in property management, Katani Square 
+                        stands as a trusted name in residential living.
+                    </p>
+                </div>
+                <div class="features">
+                    <div class="feature-card">
+                        <div class="icon">🏗️</div>
+                        <h3>Modern Design</h3>
+                        <p>Contemporary architecture with premium finishes</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🔒</div>
+                        <h3>24/7 Security</h3>
+                        <p>Round-the-clock surveillance and security personnel</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🌳</div>
+                        <h3>Green Spaces</h3>
+                        <p>Beautiful gardens and recreational areas</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">⚡</div>
+                        <h3>Smart Living</h3>
+                        <p>IoT enabled facilities and smart home features</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apartments Section -->
+    <section id="apartments">
+        <div class="container">
+            <h2 class="section-title">Our Apartments</h2>
+            <div class="apartments-grid">
+                <div class="apartment-card">
+                    <div class="apartment-image">Studio Apartment</div>
+                    <div class="apartment-info">
+                        <h3>Studio</h3>
+                        <div class="apartment-details">
+                            <p>📐 450 Sq. Ft.</p>
+                            <p>🛏️ 1 Bedroom, 1 Bathroom</p>
+                            <p>🅿️ Parking Space</p>
+                        </div>
+                        <div class="price">$1,200/mo</div>
+                        <button class="btn">Inquire Now</button>
+                    </div>
+                </div>
+
+                <div class="apartment-card">
+                    <div class="apartment-image">1-Bedroom Apartment</div>
+                    <div class="apartment-info">
+                        <h3>One Bedroom</h3>
+                        <div class="apartment-details">
+                            <p>📐 750 Sq. Ft.</p>
+                            <p>🛏️ 1 Bedroom, 1 Bathroom</p>
+                            <p>🅿️ Parking Space</p>
+                        </div>
+                        <div class="price">$1,800/mo</div>
+                        <button class="btn">Inquire Now</button>
+                    </div>
+                </div>
+
+                <div class="apartment-card">
+                    <div class="apartment-image">2-Bedroom Apartment</div>
+                    <div class="apartment-info">
+                        <h3>Two Bedroom</h3>
+                        <div class="apartment-details">
+                            <p>📐 1,100 Sq. Ft.</p>
+                            <p>🛏️ 2 Bedrooms, 2 Bathrooms</p>
+                            <p>🅿️ 2 Parking Spaces</p>
+                        </div>
+                        <div class="price">$2,500/mo</div>
+                        <button class="btn">Inquire Now</button>
+                    </div>
+                </div>
+
+                <div class="apartment-card">
+                    <div class="apartment-image">3-Bedroom Apartment</div>
+                    <div class="apartment-info">
+                        <h3>Three Bedroom</h3>
+                        <div class="apartment-details">
+                            <p>📐 1,500 Sq. Ft.</p>
+                            <p>🛏️ 3 Bedrooms, 2.5 Bathrooms</p>
+                            <p>🅿️ 2 Parking Spaces</p>
+                        </div>
+                        <div class="price">$3,200/mo</div>
+                        <button class="btn">Inquire Now</button>
+                    </div>
+                </div>
+
+                <div class="apartment-card">
+                    <div class="apartment-image">Penthouse Suite</div>
+                    <div class="apartment-info">
+                        <h3>Penthouse</h3>
+                        <div class="apartment-details">
+                            <p>📐 2,000 Sq. Ft.</p>
+                            <p>🛏️ 3 Bedrooms, 3 Bathrooms</p>
+                            <p>🅿️ 3 Parking Spaces</p>
+                        </div>
+                        <div class="price">$4,500/mo</div>
+                        <button class="btn">Inquire Now</button>
+                    </div>
+                </div>
+
+                <div class="apartment-card">
+                    <div class="apartment-image">Luxury Penthouse</div>
+                    <div class="apartment-info">
+                        <h3>Luxury Suite</h3>
+                        <div class="apartment-details">
+                            <p>📐 2,500 Sq. Ft.</p>
+                            <p>🛏️ 4 Bedrooms, 3.5 Bathrooms</p>
+                            <p>🅿️ 4 Parking Spaces</p>
+                        </div>
+                        <div class="price">$5,500/mo</div>
+                        <button class="btn">Inquire Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Section -->
+    <section id="amenities">
+        <div class="container">
+            <h2 class="section-title">Our Amenities</h2>
+            <div class="amenities-list">
+                <div class="amenity-item">
+                    <h4>🏊 Swimming Pool</h4>
+                    <p>Olympic-sized heated swimming pool with sunbathing area</p>
+                </div>
+                <div class="amenity-item">
+                    <h4>💪 Fitness Center</h4>
+                    <p>State-of-the-art gym with personal training services</p>
+                </div>
+                <div class="amenity-item">
+                    <h4>🎾 Sports Court</h4>
+                    <p>Tennis and basketball courts for recreational activities</p>
+                </div>
+                <div class="amenity-item">
+                    <h4>🍽️ Dining Area</h4>
+                    <p>Multi-cuisine restaurant and rooftop bar</p>
+                </div>
+                <div class="amenity-item">
+                    <h4>🧘 Spa & Wellness</h4>
+                    <p>Relaxation center with massage and meditation rooms</p>
+                </div>
+                <div class="amenity-item">
+                    <h4>🚗 Parking</h4>
+                    <p>Secure underground and covered parking</p>
+                </div>
+                <div class="amenity-item">
+                    <h4>🎭 Community Hall</h4>
+                    <p>Event space for celebrations and community gatherings</p>
+                </div>
+                <div class="amenity-item">
+                    <h4>👶 Kids Area</h4>
+                    <p>Playground and daycare facilities</p>
+                </div>
+                <div class="amenity-item">
+                    <h4>🌳 Gardens</h4>
+                    <p>Landscaped gardens and jogging tracks</p>
+                </div>
+                <div class="amenity-item">
+                    <h4>🛒 Shopping</h4>
+                    <p>On-site retail stores and convenience shops</p>
+                </div>
+                <div class="amenity-item">
+                    <h4>📚 Library</h4>
+                    <p>Reading lounge and study area</p>
+                </div>
+                <div class="amenity-item">
+                    <h4>⚡ Smart Home</h4>
+                    <p>IoT integration and smart apartment technology</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <strong>📍 Address</strong>
+                        Katani Square, katani primary<br>
+                        Main city, syokimau
+                    </div>
+                    <div class="contact-item">
+                        <strong>📞 Phone</strong>
+                        +254702407765<br>
+                        +254752267937
+                    </div>
+                    <div class="contact-item">
+                        <strong>✉️ Email</strong>
+                        info@katanisquare.com<br>
+                        support@katanisquare.com
+                    </div>
+                    <div class="contact-item">
+                        <strong>🕐 Hours</strong>
+                        Monday - Friday: 9:00 AM - 6:00 PM<br>
+                        Saturday: 10:00 AM - 4:00 PM<br>
+                        Sunday: Closed
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3>Send us a Message</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 Katani Square Apartments. All rights reserved.</p>
+            <p>Providing Premium Residential Living Since 2011</p>
+        </div>
+    </footer>
+</body>
+</html>
